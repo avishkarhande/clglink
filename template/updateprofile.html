@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="content">
+    <div style="margin:auto;">
+<img src="{{profile.profile_pic.url}}" alt="" width="200px" height="200px">
+<form action="" method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+<p><label for="id_profile_pic">Profile pic:</label> <input type="file" name="profile_pic"  accept="image/*" id="id_profile_pic"></p>
+
+<input type="submit" value="Update Profile Pic">
+</form>
+</div>
+</div>
+
+{% endblock %}

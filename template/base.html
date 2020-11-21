@@ -1,0 +1,196 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'assets/css/nav.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/nav.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/profile.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <style>
+      a.notif {
+  position: relative;
+  display: block;
+  height: 30px;
+  width: 30px;
+  background: url('../static/images/noti.png');
+  background-size: cover;
+  text-decoration: none;
+  background-color: aliceblue;
+}
+.num {
+  position: absolute;
+  right:-5px;
+  top: 1px;
+  color: #fff;
+  background-color: brown;
+  font-size: 12px;
+  width:20px;
+  text-align: center;
+}
+
+.mosearch-bar{
+  paddding:0;
+}
+.mosearch-bar button{
+  height:;
+}
+.mosearch-bar input[type="text"]{
+  width:70%;
+  height:30px;
+  margin:0;
+}
+
+.mosearch-bar button{
+  margin:0;
+}
+
+.mosearch-bar{
+  display: none;
+}
+.mo-search-in{
+  border:1px solid #000;
+}
+
+.profile-logo img{
+  border-radius:20px;
+}
+
+@media (max-width: 600px){
+  a.notif,.num{
+    display: none;
+  }
+  nav form{
+    display: none;
+  }
+  #profile-logo{
+    display: none;
+  }
+  .mosearch-bar{
+    display:inline-flex;
+  }
+  .mosearch-bar img{
+    margin:0;
+  }
+
+}
+.search {
+  width: 100%;
+  position: relative;
+  display: flex;
+  margin-top:10px;
+}
+
+.search form{
+  display: inline-flex;
+  margin:auto;
+  width: 100%;
+}
+
+.searchTerm {
+  width: 100%;
+  border: 3px solid #00B4CC;
+  border-right: none;
+  padding: 5px;
+  height: 20px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #9DBFAF;
+  height:36px;
+
+}
+
+.searchTerm:focus{
+  color: #00B4CC;
+}
+
+.searchButton {
+  width: 40px;
+  height: 36px;
+  border: 1px solid #00B4CC;
+  background: #00B4CC;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap{
+  width: 100%;
+}
+    </style>
+    
+  </head>
+  <body>
+    <nav>
+      <div class="menu-icon"><span class="fas fa-bars"></span></div>
+      <div class="logo">CLGIN</div>
+      <div class="nav-items">
+        <li><a href="{% url 'index' %}">Home</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+        <li><a href="{% url 'myprofile' %}">My Profile</a></li>
+        <li style="margin-left:250px;">
+          <form method="get" action="/search">
+            <input type="text" name="query" id="query" placeholder="e.g Android Developer" required>
+            <button type="submit"><img src="{% static 'images/search-icon.png' %}" alt="" width=20px" height="20px" srcset=""></button>
+          </form>
+        </li>
+        <li><a class="notif" href="{% url 'notifications' %}"><span class="num">{{count}}</span> </a></li>
+        <li><a id="profile-logo" href="{% url 'settings' %}"><img id="prof-logo" src="{% static 'images/profile-logo.png' %}" alt=""  width="30px" height="30px" srcset=""></a></li>
+        {% else %}
+        <li><a href="{% url 'login' %}">Login</a></li>
+        <li><a href="{% url 'register' %}">Register</a></li>
+
+        {% endif %}
+      </div>
+      <div class="cancel-icon"><span class="fas fa-times"></span></div>
+    
+    </nav>
+
+
+
+    
+  
+      
+        {% block content %}
+
+        {% endblock %}
+
+
+
+
+
+    
+    <script>
+    const menuBtn = document.querySelector(".menu-icon span");
+    const cancelBtn = document.querySelector(".cancel-icon");
+    const items = document.querySelector(".nav-items");
+    const form = document.querySelector("form");
+    menuBtn.onclick = ()=>{
+      items.classList.add("active");
+      menuBtn.classList.add("hide");
+      cancelBtn.classList.add("show");
+    }
+    cancelBtn.onclick = ()=>{
+      items.classList.remove("active");
+      menuBtn.classList.remove("hide");
+      cancelBtn.classList.remove("show");
+      form.classList.remove("active");
+      cancelBtn.style.color = "#ff3d00";
+    }
+    searchBtn.onclick = ()=>{
+      form.classList.add("active");
+      cancelBtn.classList.add("show");
+    }
+  </script>
+<script>
+  document.getElementById("prof-logo").src = "{{curr_user_profile.profile_pic.url}}";
+</script>
+  </body>
+</html>
+
+

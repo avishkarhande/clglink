@@ -1,0 +1,254 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+body{
+  background: #fff;
+}
+nav{
+  background:#fff;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+  padding: 0 100px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  border-bottom:1px solid #ECE4E2;
+  box-shadow: 2px 1px #ECE4E2;
+  z-index:15;
+}
+nav .logo{
+  color: #2977c9;
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -1px;
+}
+nav .nav-items{
+  display: flex;
+  flex: 1;
+  padding: 0 0 0 40px;
+}
+nav .nav-items li{
+  list-style: none;
+  padding: 0 15px;
+}
+nav .nav-items li a{
+  color: #2977c9;
+  font-size: 18px;
+  font-weight: 500;
+  text-decoration: none;
+}
+nav .nav-items li a:hover{
+  color: #ff3d00;
+}
+nav form{
+  display: inline-flex;
+}
+nav form input[type="text"]{
+  background-color: #fff;
+  height:30px;
+  width:200px;
+  border:1px solid #2977c9;
+}
+
+nav form input[type="submit"]{
+}
+
+nav .menu-icon,
+nav .cancel-icon
+{
+  width: 40px;
+  text-align: center;
+  margin: 0 50px;
+  font-size: 18px;
+  color: #2977c9;
+  cursor: pointer;
+  display: none;
+}
+nav .menu-icon span,
+nav .cancel-icon{
+  display: none;
+}
+@media (max-width: 1245px) {
+  nav{
+    padding: 0 50px;
+  }
+}
+@media (max-width: 1140px){
+  
+  nav{
+    padding: 0px;
+  }
+  nav .logo{
+    flex: 2;
+    text-align: center;
+  }
+  nav .nav-items{
+    position: fixed;
+    z-index: 99;
+    top: 70px;
+    width: 100%;
+    left: -100%;
+    height: 100%;
+    padding: 10px 50px 0 50px;
+    text-align: center;
+    background: #ffffff;
+    display: inline-block;
+    transition: left 0.3s ease;
+  }
+  nav .nav-items.active{
+    left: 0px;
+  }
+  nav .nav-items li{
+    line-height: 40px;
+    margin: 30px 0;
+  }
+  nav .nav-items li a{
+    font-size: 20px;
+  }
+  
+  nav .menu-icon{
+    display: block;
+  }
+
+  nav .menu-icon span{
+    display: block;
+  }
+  nav .menu-icon span.hide{
+    display: none;
+  }
+  nav .cancel-icon.show{
+    display: block;
+  }
+}
+.content{
+  align-items: center;
+  display: flexbox;
+  width:80%;
+  margin:2% 10% 0% 10%;
+}
+.content header{
+  font-size: 30px;
+  font-weight: 700;
+}
+.content .text{
+  font-size: 30px;
+  font-weight: 700;
+}
+.space{
+  margin: 10px 0;
+}
+nav .logo.space{
+  color: red;
+  padding: 0 5px 0 0;
+}
+@media (max-width: 980px){
+  nav .menu-icon,
+  nav .cancel-icon{
+    margin: 0 20px;
+  }
+}
+@media (max-width: 350px){
+  nav .menu-icon,
+  nav .cancel-icon{
+    margin: 0 10px;
+    font-size: 16px;
+  }
+  .nav{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+  }
+}
+
+.content{
+}
+.content header{
+  font-size: 30px;
+  font-weight: 700;
+}
+.content .text{
+  font-size: 30px;
+  font-weight: 700;
+}
+.content .space{
+  margin: 10px 0;
+}
+
+
+.messages-success{
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  height: 50px;
+  width: 100%;
+  margin: auto;
+  background-color: #dff0d8;
+  border: 1px solid #d6e9c6;
+  color:#3c763d;
+  border-radius: 1px;
+}
+
+.messages-error{
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  height: 50px;
+  width: 100%;
+  margin: auto;
+  background-color: #f2dede;
+  border: 1px solid #ebccd1;
+  color: #ac4a48;
+  border-radius: 1px;
+}
+
+.messages-warning{
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  height: 50px;
+  width: 100%;
+  margin: auto;
+  background-color: #fcf8e3;
+  border: 1px solid #faebcc;
+  color: #8a6d3b;
+  border-radius: 1px;
+
+}
+
+.bg{
+  background: url('https://static-exp3.licdn.com/sc/h/b1fxwht7hdbeusleja7ciftsj');
+  background-repeat:no-repeat;
+  background-size:cover;
+  opacity: 0.2;
+  width:auto;
+  height:100px;
+}
+
+.image-field{
+  background: url('https://static-exp3.licdn.com/sc/h/b1fxwht7hdbeusleja7ciftsj');
+  background-repeat:no-repeat;
+  background-size:cover;
+  width:300px;
+  height:200px;
+  float:left;
+}
+
+.img-info{
+  z-index: 10;
+  opacity: 1;
+  font-size: 30px;
+  float:left;
+  font-weight: 200  ;
+  margin-left:10px;
+  color:#fff;
+  margin-top:20px;
+}
+

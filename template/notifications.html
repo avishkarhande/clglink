@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+<style>
+    .notifications{
+        border: 1px solid #000;
+        width:550px;
+        margin:auto;
+        margin-top:20px;
+        margin-bottom: 20px;
+        padding:10px;
+        height:50px;
+    }
+    .notifications a{
+        text-decoration: none;
+        color:#2977c9;
+
+    }
+</style>
+{% if notifications %}
+<div class="notifications" style="border: none;">
+<h3>
+    Notifications ({{count}})<a href="{% url 'deletenotifications' %}">    Read all</a>
+</h3>
+</div>
+{% for n in notifications %}
+<div class="notifications">
+<p>{{n.notification}}</p>
+</div>
+{% endfor %}
+{% else %}
+<div class="notifications">
+    <p>No new Notifications</p>
+</div>
+{% endif %}
+{% endblock %}

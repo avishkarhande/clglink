@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<style>
+    .content{
+        padding:10px;
+        height: auto;
+        border:none;
+    }
+    .content input{
+        width:100%;
+        height:2rem;
+        padding-left:10px;
+        right:0;
+    }
+    form{
+        line-height: 1.9em;
+        margin:auto;
+    }
+    p{
+        margin-top:10px;
+    }
+    
+
+
+</style>
+<div class="content">
+  <h2>Update Work</h2><br><hr><br>
+  <form action="{% url 'updatedwork' works.id %}" method="POST" class="form">
+    {% csrf_token %}
+  <p><label for="skill"><b>Company</b></label><br>
+  <input type="text" id="name" name="name" value="{{works.name}}" placeholder=""></p>
+  <p><label for="skill"><b>Post</b></label><br>
+    <input type="text" id="work" name="work" value="{{works.work}}" placeholder=""></p>
+    <p><label for="skill"><b>Span</b></label><br>
+        <input type="text" id="span" name="span" value="{{works.span}}" placeholder=""></p><br>
+    <input type="submit" value="Update Education">
+
+</form>
+
+
+
+
+    
+</div>
+
+
+{% endblock %}

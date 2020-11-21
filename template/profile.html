@@ -1,0 +1,259 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<title>{{profile.name}} | CLGIN</title>
+
+<div class="main-container">
+<div class="container">
+    <div class="main" style="margin-top:40px;">
+        <div class="profile-head">
+            <div class="pro-header">
+                <div></div><div> {% if profile.user == user %} <a href="{% url 'updateprofile' profile.user.username %}"><img src="{% static 'images/edit.png' %}" width="20px" height="20px" alt="" srcset=""></a> {% else %} {% endif %}</div> 
+                </div>
+            <div class="general-profile">
+            <div class="up-profile-head">
+                {% if profile.user == user %}<a href="{% url 'updateprofile' profile.user.username %}"><img src="{{profile.profile_pic.url}}" alt=""></a>{% else %} <img src="{{profile.profile_pic.url}}" alt="">{% endif %}
+
+            </div>
+            
+            <div class="low-profile-head">
+            <p class="username">{{profile.name}}</p>
+                <p class="desc">{{profile.desc}}</p>
+                <p class="desc">Year Of Study : {{profile.year}}</p>
+            </div>
+        </div>
+        </div>
+        
+    </div>
+    <div class="edu">
+        <div class="profile-head-1">
+            <div class="pro-header">
+                <div><h4>Skills Details</h4></div><div> {% if profile.user == user %} <a href="{% url 'myprofile' %}"><img src="{% static 'images/edit.png' %}" width="20px" height="20px" alt="" srcset=""></a> {% else %} {% endif %}</div> 
+                </div>
+                <hr>
+            <div class="skill-head">
+                {% if skill %}
+                {% for s in skill %}
+                <p class="skill-name">{{s.skill}}</p><hr>
+                {% endfor %}
+                {% else %}
+                <h6>No Records Found</h6> 
+                {% endif %}
+            </div>
+            
+       
+        </div>
+    </div>
+    <div class="edu">
+        <div class="profile-head-1">
+            <div class="pro-header">
+                <div><h4>Achievement Details</h4></div><div> {% if profile.user == user %} <a href="{% url 'myprofile' %}"><img src="{% static 'images/edit.png' %}" width="20px" height="20px" alt="" srcset=""></a> {% else %} {% endif %}</div> 
+                </div>
+                <hr>
+            <div class="skill-head">
+                {% if achievements %}
+                {% for s in achievements %}
+                <p class="skill-name">{{s.achievement}}</p><hr>
+                {% endfor %}
+                {% else %}
+                <h6>No Records Found</h6> 
+                {% endif %}
+            </div>
+            
+       
+        </div>
+    </div>
+    
+    <div class="edu">
+        <div class="profile-head-1">
+            <div class="pro-header">
+            <div><h4>Educational Details</h4></div><div> {% if profile.user == user %} <a href="{% url 'myprofile' %}"><img src="{% static 'images/edit.png' %}" width="20px" height="20px" alt="" srcset=""></a> {% else %} {% endif %}</div> 
+            </div>
+            <hr>
+            {% if education %}
+            {% for e in education %}
+            <div class="edu-head">
+            <p class="edu-name">{{e.name}}</p>
+            <p class="edu-degree">{{e.degree}}</p>
+            <p class="edu-span">{{e.span}}</p>
+        </div>
+        {% endfor %}
+            {% else %}
+                <h6>No Records Found</h6>
+            {% endif %}
+            
+       
+        </div>
+        
+    </div>
+    <div class="edu">
+        <div class="profile-head-1">
+            <div class="pro-header">
+                <div><h4>Work Details</h4></div><div> {% if profile.user == user %} <a href="{% url 'myprofile' %}"><img src="{% static 'images/edit.png' %}" width="20px" height="20px" alt="" srcset=""></a> {% else %} {% endif %}</div> 
+                </div>
+                <hr>{% if works %}
+            {% for w in works %}
+            <div class="edu-head">
+            <p class="edu-name">{{w.name}}</p>
+            <p class="edu-degree">{{w.work}}</p>
+            <p class="edu-span">{{w.span}}</p>
+        </div>
+        {% endfor %}
+            {% else %}
+            <h6>No Records Found</h6>
+            {% endif %}
+            
+       
+        </div>
+        
+    </div>
+    
+</div>
+
+<div class="right-sidebar">
+<div class="social-profiles">
+    <p class="head">Connect with {{profile.name}} via </p>
+    {% if profile.is_phone == 1 %}
+        {% if profile.user == request.user %}
+            {% if profile.phone != None %}
+            <a target="_blank_" href="{% url 'myprofile' %}">
+                <div class="social-ind">
+                    <div><img src="{% static 'images/phone.png' %}" alt="" width="60px" height="60px" srcset=""></div>
+                    <div class="profile-name"> {{profile.phone}} </div>
+                </div></a>
+                {% else %}
+                <div class="social-ind">
+                    <div><img src="{% static 'images/phone.png' %}" alt="" width="60px" height="60px" srcset=""></div>
+                    <div class="profile-name"> + Add Your Phone Number  </div>
+                </div></a>
+                {% endif %}
+        {% else %}
+        {% if profile.phone != None %}
+            <div class="social-ind">
+                <div><img src="{% static 'images/phone.png' %}" alt="" width="60px" height="60px" srcset=""></div>
+                <div class="profile-name">{{profile.phone}}</div>
+            </div>
+            {% else %}
+            
+            {% endif %}
+        {% endif %}
+
+    {% else %}
+    {% if profile.user == request.user %}
+            {% if profile.phone != '' %}
+            <a target="_blank_" href="{% url 'myprofile' %}">
+                <div class="social-ind">
+                    <div><img src="{% static 'images/phone.png' %}" alt="" width="60px" height="60px" srcset=""></div>
+                    <div class="profile-name"> {{profile.phone}} </div>
+                </div></a>
+                {% else %}
+                <div class="social-ind">
+                    <div><img src="{% static 'images/phone.png' %}" alt="" width="60px" height="60px" srcset=""></div>
+                    <div class="profile-name"> + Add Your Phone Number </div>
+                </div></a>
+                {% endif %}
+        {% else %}
+        {% if profile.phone != '' %}
+           
+            {% else %}
+            <div class="social-ind">
+                <div><img src="{% static 'images/phone.png' %}" alt="" width="60px" height="60px" srcset=""></div>
+                <div class="profile-name">No Phonhe Number </div>
+            </div></a>
+            {% endif %}
+        {% endif %}
+    
+    {% endif %}<hr>
+    {% if profile.linkedin == ''%}
+    {% if profile.user == request.user %}
+    <a target="_blank_" href="{% url 'myprofile' %}">
+        <div class="social-ind">
+            <div><img src="{% static 'images/linkedin.png' %}" alt="" width="80px" height="50px" srcset=""></div>
+            <div class="profile-name"> + Add Your LinkedIn </div>
+        </div></a>
+    {% else %}
+    
+        <div class="social-ind">
+            <div><img src="{% static 'images/linkedin.png' %}" alt="" width="80px" height="50px" srcset=""></div>
+            <div class="profile-name"> No Profile Found </div>
+        </div>
+    {% endif %}
+
+    {% else %}
+    <a target="_blank_" href="{{profile.linkedin}}">
+    <div class="social-ind">
+        <div><img src="{% static 'images/linkedin.png' %}" alt="" width="80px" height="50px" srcset=""></div>
+        <div class="profile-name">{{profile.name}}</div>
+    </div></a>
+    
+    {% endif %}
+    <hr>
+    {% if profile.fb == '' %}
+    {% if profile.user == request.user %}
+    <a target="_blank_" href="{% url 'myprofile' %}">
+        <div class="social-ind">
+            <div><img src="{% static 'images/fb.png' %}" alt="" width="80px" height="50px" srcset=""></div>
+            <div class="profile-name"> + Add Your Facebook </div>
+        </div></a>
+    {% else %}
+        <div class="social-ind">
+            <div><img src="{% static 'images/fb.png' %}" alt="" width="80px" height="50px" srcset=""></div>
+            <div class="profile-name"> No Profile Found </div>
+        </div>
+    {% endif %}
+
+    {% else %}
+    <a target="_blank_" href="{{profile.fb}}">
+    <div class="social-ind">
+        <div><img src="{% static 'images/fb.png' %}" alt="" width="80px" height="50px" srcset=""></div>
+        <div class="profile-name">{{profile.name}}</div>
+    </div></a>
+    
+    {% endif %}
+    <hr>
+    {% if profile.ig == ''%}
+    {% if profile.user == request.user %}
+    <a target="_blank_" href="{% url 'myprofile' %}">
+        <div class="social-ind">
+            <div><img src="{% static 'images/ig.png' %}" alt="" width="80px" height="50px" srcset=""></div>
+            <div class="profile-name"> + Add Your Instagram </div>
+        </div></a>
+    {% else %}
+    
+        <div class="social-ind">
+            <div><img src="{% static 'images/ig.png' %}" alt="" width="80px" height="50px" srcset=""></div>
+            <div class="profile-name"> No Profile Found </div>
+        </div>
+    {% endif %}
+
+    {% else %}
+    <a target="_blank_" href="{% url 'myprofile' %}">
+    <div class="social-ind">
+        <div><img src="{% static 'images/ig.png' %}" alt="" width="80px" height="50px" srcset=""></div>
+        <div class="profile-name">{{profile.name}}</div>
+    </div></a>
+    
+    {% endif %}
+    
+
+</div>
+
+<div class="user-recommend">
+    <p class="head">Suggested Users for You</p>
+    <a href="{% url 'profile' random_user.user.username %}">
+    <div class="social-ind">
+        <div><img src="{{random_user.profile_pic.url}}" alt="" width="100%" height="100%" srcset=""></div>
+        <div class="profile-name">{{random_user.name}}</div>
+    </div>
+    </a>
+</div>
+
+
+</div>
+</div>
+
+<div class="foot">
+<h5>All Rights Reseved</h5>
+</div>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'assets/css/home.css' %}">
+
+<div class='homepage'>
+<div class="home-left">
+<div class='image-field'>
+</div>
+<div class="img-info">Get Help<br> From People<br> Who can Help !</div>
+</div>
+<div class="info-right">
+  Welcome To The<br> DYP Community !
+</div>
+</div>
+
+<div class="searching-for">
+  <!-- <div class="searching-bg">
+    
+  </div> -->
+  <div class="searching-left">
+    Find The Right<br> Person To<br> Get Help From
+
+  </div>
+
+  <div class="searching-right">
+    <a href="{% url 'login' %}" class="btn">Search for Web Developer</a>
+    <a href="{% url 'login' %}" class="btn">Search for Competitive Programmer</a>
+    <a href="{% url 'login' %}" class="btn">Search for Android Developer</a>
+  </div>
+</div>
+
+<div class="partner">
+  <div class="partner-head">
+    Find the Right Person to do the Job and make your dream startup come true
+  </div>
+</div>
+
+<footer>
+  <div class="footer">
+  <div class="footer-logo">CLGin</div>
+  <div class="footer-navs">
+    <div class="links">
+      <a href="home">Home</a>
+      <a href="blogs">Blog</a>
+    </div>
+    <div class="links">
+      <a href="register">Register</a>
+      <a href="login">Login</a>
+    </div>
+  </div>
+</div>
+  <h5>Created by Avishkar Hande and Adarsh Shete</h5>
+</footer>
+
+{% endblock %}

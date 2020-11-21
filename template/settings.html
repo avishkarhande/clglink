@@ -1,0 +1,76 @@
+{% extends 'base.html' %} 
+
+
+
+{% block content %}
+<style>
+    .messages-error{
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  height: 50px;
+  width: 100%;
+  margin: auto;
+  background-color: #f2dede;
+  border: 1px solid #ebccd1;
+  color: #ac4a48;
+  border-radius: 1px;
+}
+    .content{
+        border:2px solid darkgray;
+    }
+    h3{
+        margin-bottom:10px;
+    }
+    .pass-change{
+        padding:15px;
+        line-height: 1.5rem;
+        width:100%;
+    }
+    .pass-change input[type="text"]{
+        width:100%;
+        height:30px;
+    }
+    .pass-change input[type="submit"]{
+        background-color: #2977c9;
+        padding:10px;
+        color:#fff;
+        margin-top:10px;
+    }
+    form{
+        width:100%;
+    }
+    form input[type="password"]{
+        width:100%;
+        height:30px;
+        font-size: 16px;
+        padding-left:2px;
+    }
+    @media (max-width:600px){
+        .content{
+            width:100%;
+            margin:0;
+            padding:10px;
+            margin-top:30px;
+        }
+    }
+</style>
+<div class="content">
+    <div class="pass-change">
+        {% for field in form %}
+      {% for error in field.errors %}
+        <p class="messages-error">{{ error }}</p>
+      {% endfor %}
+    {% endfor %}
+        <h3>Change Password</h3>
+        <form method="POST" action="/password_change/">
+            {% csrf_token %}
+            <label for="old_password">Current Password</label><br><input type="password" name="old_password" id="old_password"><br>
+            <label for="new_password1">New Password</label><br><input type="password" name="new_password1" id="new_password1"><br>
+            <label for="new_password2">Confirm New Password</label><br><input type="password" name="new_password2" id="new_password2"><br>
+            <input type="submit" value="Change Password">
+        </form>
+    </div>
+    
+</div>
+{% endblock %}

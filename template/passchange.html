@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    form{
+        width:100%;
+        margin:auto;
+    }
+    input{
+        width:100%;
+        height:30px;
+        margin:10px;
+        margin-left:0;
+    }
+</style>
+
+<div class="content">
+    {% if messages %}
+			{% for message in messages %}
+				<p class="messages">{{message}}</p>
+			{% endfor %}
+		{% else %}
+		{% endif %}
+<form method="POST" action="{% url 'changepassword' %}">
+    {% csrf_token %}
+    <label for="current">Current Password</label><br><input type="text" name="current" id="current">
+    <label for="current">New Password</label><br><input type="text" name="password1" id="password1">
+    <label for="current">Confirm New Password</label><br><input type="text" name="password2" id="password2">
+    <input type="submit" value="Change Password">
+</form>
+</div>
+{% endblock %}

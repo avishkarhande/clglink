@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+  .pass-reset a{
+    text-decoration: none;
+    color:#2977c9
+  }
+  .content{
+    position: absolute;
+  }
+</style>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'assets/css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/mobile.css' %}">
+    
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <div class="body" style="overflow: hidden;">
+	<div>
+		{% if messages %}
+			{% for message in messages %}
+				<p class="messages-{{message.tags}}">{{message}}</p>
+			{% endfor %}
+		{% else %}
+		{% endif %}
+  </div>
+  
+  <div class="login">
+    <div class="login-head">Login</div>
+    <div class="login-form">
+    <form action="../login/" method="POST">
+      {% csrf_token %}
+      <input type="text" placeholder="Email" name="email" id="email" required>
+      <input type="password" placeholder="Password" name="pswrd" id="pswrd" required>
+      <input type="submit" value="Login">
+    </form>
+    <div class="pass-reset" style="float:right;text-decoration: none;margin:10px;">
+      <a href="{% url 'password_reset' %}"><h5>Forgot Password</h5></a>
+    </div>
+  </div>
+  </div>
+    <script src="{% static 'assets/js/script.js' %}"></script>
+</div>
+{% endblock %}

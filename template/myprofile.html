@@ -1,0 +1,409 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<style>
+    .content{
+        padding:0px;
+        height: auto;
+    }
+    .content input[type=text],input[type=email],input[type="number"],textarea {
+        width:80%;
+        height:2rem;
+        padding-left:10px;
+        right:0;
+    }
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.add-bio textarea{
+    padding:10px;
+}
+
+.content input[type=text],input[type=email],input[type="number"],textarea {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.content textarea{
+  height:100px;
+}
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+
+.add-skill{
+    background-color: lightblue;
+    outline: none;
+    padding:6px;
+    border:none;
+    cursor: pointer;
+}
+
+.educational,.general{
+  margin-top:15px;
+  padding:10px;
+}
+
+
+
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-top: none;
+  margin: auto;
+}
+
+.edu-details{
+  padding:10px;
+  line-height: 1.3em;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
+.edu-name{
+  font-weight: bolder;
+  font-size: medium;
+}
+
+.edu-degree{
+  font-size: smaller;
+}
+
+.edu-span{
+  font-size: small;
+  color:grey;
+}
+
+.edit{
+  float:right;
+  text-align: right;
+  display:grid;
+  grid-template-columns: 1fr;
+}
+
+.edit a{
+  text-decoration: none;
+  color:#000;
+}
+
+.edit a:hover{
+  color:#2977c9;
+}
+
+.general img{
+  border-radius:50%;
+  margin:auto;
+}
+.img{
+  margin:auto;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+    .tabcontent{
+      width: 100%;
+      margin: 0;
+    }
+    .tab{
+      width: 100%;
+      margin: 0;
+      margin:2px solid #000;
+    }
+    .content{
+      width:100%;
+      margin:0;
+    }
+  }
+
+</style>
+<div class="content">
+
+  <a href="{% url 'profile' desc.user.username %}"><button style="background-color: #2977c9;padding:10px;color:#fff;margin:10px;cursor: pointer;">View Complete Profile</button></a>
+
+  {% if messages %}
+			{% for message in messages %}
+				<p class="messages-{{message.tags}}">{{message}}</p>
+			{% endfor %}
+		{% else %}
+		{% endif %}<br>
+
+  <div class="tab">
+    <button class="tablinks" onclick="openCity(event, 'general')" id="defaultOpen">General</button>
+    <button class="tablinks" onclick="openCity(event, 'skills')">Skills</button>
+    <button class="tablinks" onclick="openCity(event, 'education')">Education</button>
+    <button class="tablinks" onclick="openCity(event, 'work')">Work</button>
+    <button class="tablinks" onclick="openCity(event, 'achievement')">Achievement</button>
+    <button class="tablinks" onclick="openCity(event, 'socialmedia')">Social Media Profiles</button>
+  </div>
+  
+  <div id="general" class="tabcontent">
+    <div class="general">
+      <div class="img">
+        <img style="text-align:center;" src="{{desc.profile_pic.url}}" alt="" width="150px" height="150px"><br>
+        <a href="{% url 'updateprofile' desc.user.username %}"><button class="add-skill">Update Photo</button></a>
+        </div>
+    <p><label for="email">Email : </label><br>
+      <input type="email"  value="{{ user.email }}" readonly></p><br>
+      <p><label for="username">Username : </label><br>
+        <form action="{% url 'changeusername' %}" method="POST">
+          {% csrf_token %}
+      <input type="text" name="uname"  value="{{ user.username }}"></p>
+      <button class="add-skill" type='submit'>Update Username</button><br><br>
+      
+      </form>
+      <br>
+      <p><label for="phone">Phone Number : </label><br>
+        <form action="{% url 'updatephone' %}" method="POST">
+          {% csrf_token %}
+          <input type="number" name="phone" id="phone" value="{{desc.phone}}">
+          {% if desc.is_phone == 1 %}
+          <input id='public' type='checkbox' value='1' name='public' checked>
+          <input id='publichidden' type='hidden' value='0' name='public'>
+          {% else %}
+          <input id='public' type='checkbox' value='1' name='public'>
+          <input id='publichidden' type='hidden' value='0' name='public'>
+          {% endif %}
+          <label for="public"> Allow People to view?</label></p><br>
+      <button onclick="check()" class="add-skill" type='submit'>Update Phone Details</button><br><br>
+      
+      </form>
+      <br>
+      <form action="{% url 'updateyear' %}" method="POST">
+        {% csrf_token %}
+        <label for="year">Year Of Study</label><br>
+         <input type="text" name="year" id="year" value="{{desc.year}}" >
+         <button class="add-skill" type='submit'>Update Year Of Study</button><br><br>
+        </form>
+      <br>
+      <form method='POST' action="../addbio/" class="add-bio">
+          {% csrf_token %}
+          <label for="skill">Update Bio </label><br><textarea rows="6" width="100%" id="bio" name="bio" type="text" required >{{ desc.desc }}</textarea>
+          <input type="text" name="uname"  value="{{ user.username }}" hidden readonly><br>
+          <button class="add-skill" type='submit'>Update Bio</button><br><br>
+      </form>
+      <br>
+    </div>
+  </div>
+  
+  <div id="skills" class="tabcontent">
+    <form method='POST' action="../updateskill/">
+      {% csrf_token %}
+      <label for="skill">Skill : </label><br><input id="skill" name="skill" type="text" required><br>
+      <input type="text" name="uname"  value="{{ user.username }}" hidden readonly><br>
+      <button class="add-skill" type='submit'>Add Skill</button><br><br>
+  </form>
+  
+  {% if skill %}
+      <table id="customers">
+          <tr>
+            <th>Skills</th>
+            <th></th>
+          </tr>
+          {% for s in skill %}
+          <tr>
+            <td>{{s.skill}}</td>
+            <td><a href="{% url 'deleteindskill' s.id %}">Delete</a></td>  
+          </tr>
+          {% endfor %}
+        </table>
+      {% else %}
+  
+      {% endif %}
+  </div>
+  
+  <div id="education" class="tabcontent">
+    <div class="educational">
+      <form method='POST' action="../add-edu/">
+        {% csrf_token %}
+        <label for="edu-name">Add Institution : </label><br><input id="edu-name" name="edu-name" type="text" required><br>
+        <label for="edu-degree">Degree : </label><br><input id="edu-degree" name="edu-degree" type="text" required><br>
+        <label for="edu-span">Time Span (YYYY-YYYY) : </label><br><input id="edu-span" name="edu-span" type="text" required><br>
+        <input type="text" name="uname"  value="{{ user.username }}" hidden readonly><br>
+        <button class="add-skill" type='submit'>Add Education</button><br><br>
+    </form>
+    <h2>Educational Details</h2>
+    {% if edu %}
+    <div>
+      {% for e in edu %}
+      <hr>
+      <div class="edu-details">
+        <div>
+        <p class="edu-name">{{e.name}}</p>
+        <p class="edu-degree">{{e.degree}}</p>
+        <p class="edu-span">{{e.span}}</p>
+        </div>
+        <div class="edit">
+          <a href="{% url 'updateedu' e.id %}">EDIT</a>
+          <a href="{% url 'deleteedu' e.id %}">DELETE</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+
+    {% endif %}
+    </div>
+  </div>
+  <div id="work" class="tabcontent">
+    <div class="educational">
+      <form method='POST' action="../add-work/">
+        {% csrf_token %}
+        <label for="edu-name">Company </label><br><input id="work-name" name="work-name" type="text" required><br>
+        <label for="edu-degree"> Post </label><br><input id="work-work" name="work-work" type="text" required><br>
+        <label for="edu-span">Time Span (MM/YYYY-MM/YYYY) : </label><br><input id="work-span" name="work-span" type="text" required><br>
+        <input type="text" name="uname"  value="{{ user.username }}" hidden readonly><br>
+        <button class="add-skill" type='submit'>Add Work</button><br><br>
+    </form>
+    <h2>Work Details</h2>
+    {% if works %}
+    <div>
+      {% for w in works %}
+      <hr>
+      <div class="edu-details">
+        <div>
+        <p class="edu-name">{{w.name}}</p>
+        <p class="edu-degree">{{w.work}}</p>
+        <p class="edu-span">{{w.span}}</p>
+        </div>
+        <div class="edit">
+          <a href="{% url 'updatework' w.id %}">EDIT</a>
+          <a href="{% url 'deletework' w.id %}">DELETE</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+      <h5>No data Found</h5>
+    {% endif %}
+    </div>
+  </div>
+  <div id="achievement" class="tabcontent">
+    <div class="educational">
+      <form method='POST' action="{% url 'addachievement' %}">
+        {% csrf_token %}
+        <label for="edu-name">Achievement </label><br><input id="achievement" name="achievement" type="text" required><br>
+        <input type="text" name="uname"  value="{{ user.username }}" hidden readonly><br>
+        <button class="add-skill" type='submit'>Add Work</button><br><br>
+    </form>
+    <h2>Achievements</h2>
+    {% if achievements %}
+    <div>
+      {% for a in achievements %}
+      <hr>
+      <ul>
+      <div class="edu-details">
+        <div>
+        <p class="edu-name"><li>{{a.achievement}}</li></p>
+        </div>
+        <div class="edit">
+          
+        </div>
+      </div>
+    </ul>
+      {% endfor %}
+    </div>
+    {% else %}
+      <h5>No data Found</h5>
+    {% endif %}
+    </div>
+  </div>
+  <div id="socialmedia" class="tabcontent">
+    <div class="educational">
+      <form method='POST' action="{% url 'addsocialmedia' %}">
+        {% csrf_token %}
+        <label for="edu-name">LinkedIn URL </label><br><input id="linkedin" value="{{desc.linkedin}}" name="linkedin" type="text" ><br>
+        <label for="edu-name">Facebook URL </label><br><input id="facebook" value="{{desc.facebook}}" name="facebook" type="text" ><br>
+        <label for="edu-name">Instagram URL </label><br><input id="instagram" value="{{desc.instagram}}" name="instagram" type="text" ><br>
+        <input type="text" name="uname"  value="{{ user.username }}" hidden readonly><br>
+        <button class="add-skill" type='submit'>Add Social Media</button><br><br>
+    </form>
+    </div>
+  </div>
+  <br>
+  
+  <script>
+  function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+  
+  // Get the element with id="defaultOpen" and click on it
+  document.getElementById("defaultOpen").click();
+  </script>
+
+
+<script>
+  function check(){
+  if(document.getElementById("public").checked) {
+    document.getElementById('publichidden').disabled = true;
+  }
+  }
+</script>
+
+
+
+
+    
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,216 @@
+.head-container{
+    margin:0;
+    width:100%;
+}
+.main-container{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+.container{
+    margin: auto;
+    width:90%;
+    height:fit-content;
+
+}
+
+.main,.edu{
+    height:fit-content;
+    width:auto;
+    margin: 30px 0;
+}
+
+.edu{
+    line-height: 1.7em;
+}
+
+.container h4{
+    color:#2977c9;
+}
+
+.profile-head{
+    background-color: #fff;
+    width:100%;
+    height:fit-content;
+    padding: 10px;
+    position: relative;
+    display: grid;
+    grid-template-columns: fr3 fr3;
+}
+
+.profile-head-1{
+    border:2px solid darkgray;
+    background-color: #fff;
+    width:100%;
+    height:fit-content;
+    padding: 10px;
+    position: relative;
+    display: grid;
+    grid-template-columns: fr3 fr3;
+}
+
+.up-profile-head{
+    width:100%;
+    float:left;
+}
+.up-profile-head img{
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    margin-left: 10px;
+}
+.low-profile-head{
+    float:left;
+    clear: both;
+    line-height: 1.5em;
+    padding:15px;
+}
+
+.username{
+    font-weight:500;
+    font-size: 25px;
+    margin-top:10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.desc{
+    font-size: 15px;
+    margin-top:5px;
+    line-height: 1.1rem;
+}
+
+.edu .edu-head, .skill-head{
+    padding:10px;
+    line-height: 1.1em;
+}
+
+.skill-head{
+    line-height: 2em;
+    font-weight: bolder;
+}
+
+.edu-name{
+    font-weight: 600;
+}
+
+.edu-degree{
+    font-size: 0.9em;
+}
+
+.edu-span{
+    font-size: 0.8em;
+}
+
+.skill-name{
+    margin-left: 10px;
+}
+
+hr{
+    opacity: 0.4;
+}
+
+
+#customers a{
+	text-decoration: none;
+}
+
+
+.social-profiles{
+    width:80%;
+    border:2px solid darkgray;
+    float:left;
+    margin: auto;
+    height: fit-content;
+    padding:10px;
+}
+.user-recommend a{
+    text-decoration: none;
+}
+.user-recommend{
+    width:80%;
+    border:2px solid darkgray;
+    float:left;
+    margin: auto;
+    margin-top: 40px;
+    min-height: 200px;
+    padding:10px;
+    padding-bottom:20px;
+    margin-bottom:40px;
+    
+}
+
+.social-profiles .head{
+    font-weight: 600;
+    
+}
+
+.social-ind{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    margin:15px;
+    height:50px;
+}
+
+.profile-name{
+    margin:auto;
+}
+
+.foot h5{
+    text-align: center;
+    height:50px;
+    background-color: #faf9f7 ;
+    padding-top:10px;
+}
+
+.social-profiles a{
+    text-decoration: none;
+}
+
+@media (max-width: 600px) {
+    .container{
+        margin:0;
+        width:99%;
+    }
+    .main,.edu{
+        width:100%;
+    }
+    .profile-head-1{
+        margin:auto;
+        width:90%;
+    }
+    .main-container{
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    .social-profiles{
+        margin-top:0;
+        width:90%;
+    }
+    .user-recommend{
+        width: 90%;
+    }
+    .username{
+        font-size: 18px;
+    }
+    .desc{
+        font-size: 12px;
+    }
+  }
+
+  .pro-header{
+      display: grid;
+      grid-template-columns: 2.9fr 0.1fr;
+  }
+
+  .right-sidebar{
+    display: grid;
+    grid-template-columns: 1fr;
+    float:left;
+    margin: auto;
+    margin-top:40px;
+    height: fit-content;
+  }
+
+  .general-profile{
+      display: grid;
+      grid-template-columns: 0.5fr 1.7fr;
+  }

@@ -1,0 +1,98 @@
+
+{%  extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="wrap">
+  <div class="search">
+    <form action="/search" method="get">
+     <input type="text" name="query" id="query" class="searchTerm" placeholder="E.g Android Developer">
+     <button type="submit" class="searchButton">
+       <i class="fa fa-search"></i>
+    </button>
+  </form>
+  </div>
+</div>
+<style>
+  @media (max-width: 600px){
+    .mob-search-bar{
+  display: block;
+}
+
+.content{
+  min-height: 100px;
+}
+  }
+  .loader {
+    margin:auto;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+<script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'js/infinite.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'assets/css/home.css' %}">
+<div class="content ">
+<div class="left infinite-container">
+  
+    {% for p in profile %}
+    <div class="infinite-item">
+    <a href="{% url 'profile' p.user.username %}" >
+    <div class="profile-one ">
+        {% if p.profile_pic %}
+        <div class="profile-one-image"><img src="{{p.profile_pic.url}}" alt=""></div>
+        {% else %}
+
+        {% endif %}
+        <div>
+        <div class="profile-one-name">{{p.name}}</div>
+        <div class="profile-one-bio">{{p.desc}}</div>
+        <div class="profile-one-bio">Year Of Study - {{p.year}}</div>
+        </div>
+    </div>
+    </a>
+    </div>
+   
+    {% endfor %}
+    
+</div>
+{% if profile.has_next %}
+    <a style="display:none;" class="infinite-more-link" href="?page={{ profile.next_page_number }}">More</a>
+  {% endif %}
+  <div class="loader" style="display: none;">
+
+  </div>
+</div>
+<script>
+    var infinite = new Waypoint.Infinite({
+      element: $('.infinite-container')[0],
+    onBeforePageLoad: function () {
+        $('.loader').show();
+      },
+      onAfterPageLoad: function ($items) {
+        $('.loader').hide();
+      }
+    });
+    
+  </script>
+<script>
+  document.getElementById("prof-logo").src = "{{curr_user_profile.profile_pic.url}}";
+</script>
+
+{% endblock %}
